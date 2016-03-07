@@ -15,3 +15,5 @@ Configure `.tradierc`:
   "plugins": [["files", {"files": ["*.html", "*.ico"], "src": "./src", "dest": "./dist"}]]
 }
 ```
+
+Run `tradie build`.
