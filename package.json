@@ -1,0 +1,22 @@
+{
+  "name": "tradie-plugin-copy",
+  "main": "./dist/index.js",
+  "version": "0.1.0",
+  "description": "A plugin for copying random files.",
+  "keywords": [
+    "tradie",
+    "tradie-plugin",
+    "files"
+  ],
+  "dependencies": {
+    "cpx": "^1.2.1",
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0"
+  },
+  "scripts": {
+    "build": "babel index.js -d ./dist"
+  }
+}
