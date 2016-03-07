@@ -4,7 +4,7 @@ A plugin for copying random files.
 
 ## Installation
 
-    npm --save-dev tradie-plugin-files
+    npm --save-dev tradie-plugin-copy
 
 ## Usage
 
@@ -12,7 +12,7 @@ Configure `.tradierc`:
 
 ```json
 {
-  "plugins": [["files", {"files": ["*.html", "*.ico"], "src": "./src", "dest": "./dist"}]]
+  "plugins": [["copy", {"files": ["*.html", "*.ico"], "src": "./src", "dest": "./dist"}]]
 }
 ```
 
