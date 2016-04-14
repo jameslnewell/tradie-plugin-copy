@@ -20,7 +20,7 @@ export default function(tradie, config) {
     //TODO: move running multiple files to a core part of cpx
     let files = '';
     if (patterns.length > 1) {
-      files = `{${patterns.map(file => path.join(src, file)).join(',')}`;
+      files = `{${patterns.map(file => path.join(src, file)).join(',')}}`;
     } else {
       files = patterns.map(file => path.join(src, file)).join();
     }
