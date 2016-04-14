@@ -18,7 +18,12 @@ export default function(tradie, config) {
     const patterns = [].concat(config.files || []);
 
     //TODO: move running multiple files to a core part of cpx
-    const files = patterns.map(file => path.join(src, file)).join(',');
+    let files = '';
+    if (patterns.length > 1) {
+      files = `{${patterns.map(file => path.join(src, file)).join(',')}`;
+    } else {
+      files = patterns.map(file => path.join(src, file)).join();
+    }
 
     switch (cmd.name) {
 
@@ -49,6 +54,3 @@ export default function(tradie, config) {
 
   });
 };
-
-
-//TODO tradie-plugin-serve for a real simple server, maybe redirect 404s to the index - superstatic?
