@@ -13,8 +13,8 @@ export default function(tradie, config) {
   tradie.once('command.started', cmd => {
 
     const watching = cmd.args.watch;
-    const src = config.src || tradie.config.scripts.src || tradie.config.styles.src;
-    const dest = config.dest || tradie.config.scripts.dest || tradie.config.styles.dest;
+    const src = config.src || tradie.config.src;
+    const dest = config.dest || tradie.config.dest;
     const patterns = [].concat(config.files || []);
 
     //TODO: move running multiple files to a core part of cpx
