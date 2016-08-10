@@ -1,6 +1,6 @@
 # tradie-plugin-copy
 
-A plugin for copying random files.
+A plugin for copying random files when tradie builds.
 
 ## Installation
 
@@ -8,12 +8,17 @@ A plugin for copying random files.
 
 ## Usage
 
-Configure `.tradierc`:
+1. Configure `tradie.config.js`:
 
-```json
-{
-  "plugins": [["copy", {"files": ["*.html", "*.ico"], "src": "./src", "dest": "./dist"}]]
-}
+```js
+var copy = require('tradie-plugin-copy').default;
+
+module.exports = {
+  plugins: [
+    copy({files: ['*.html', '*.ico']})
+  ]
+};
 ```
 
-Run `tradie build`.
+
+2. Run `tradie build`.
