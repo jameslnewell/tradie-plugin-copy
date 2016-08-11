@@ -1,7 +1,7 @@
 {
   "name": "tradie-plugin-copy",
   "main": "./dist/index.js",
-  "version": "1.0.0-preview.1",
+  "version": "1.0.0",
   "description": "A plugin for copying random files.",
   "keywords": [
     "tradie",

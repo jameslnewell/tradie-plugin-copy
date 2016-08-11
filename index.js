@@ -10,44 +10,35 @@ const dbg = debug('tradie-plugin-copy');
  */
 export default (options = {}) => tradie => {
   const {files = []} = options;
+  const {command, src, dest, watch: watching} = tradie;
 
-  const init = cmd => {
+  //only copy files when we're building
+  if (command !== 'build') {
+    return;
+  }
 
-    //only copy files when we're building
-    if (cmd.name !== 'build') {
-      return;
-    }
+  //TODO: move running multiple files to a core part of cpx
+  let glob = null;
+  if (files.length > 1) {
+    glob = `{${files.map(file => path.join(src, file)).join(',')}}`;
+  } else {
+    glob = files.map(file => path.join(src, file)).join();
+  }
 
-    const src = tradie.config.src;
-    const dest = tradie.config.dest;
-    const watching = cmd.args.watch;
+  if (watching) {
 
-    //TODO: move running multiple files to a core part of cpx
-    let glob = null;
-    if (files.length > 1) {
-      glob = `{${files.map(file => path.join(src, file)).join(',')}}`;
-    } else {
-      glob = files.map(file => path.join(src, file)).join();
-    }
+    watch(glob, dest, (err) => {
+      if (err) return tradie.emit('error', err);
+    })
+      .on('copy', e => dbg(`Copied file "${path.relative(dest, e.dstPath)}"`))
+    ;
 
-    if (watching) {
+  } else {
 
-      watch(glob, dest, (err) => {
-        if (err) return tradie.emit('error', err);
-      })
-        .on('copy', e => dbg(`Copied file "${path.relative(dest, e.dstPath)}"`))
-      ;
+    copy(glob, dest, (err) => {
+      if (err) return tradie.emit('error', err);
+    });
 
-    } else {
-
-      copy(glob, dest, (err) => {
-        if (err) return tradie.emit('error', err);
-      });
-
-    }
-
-  };
-
-  tradie.once('command.started', init);
+  }
 
 };
